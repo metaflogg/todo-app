@@ -15,12 +15,14 @@ list_box = sg.Listbox(values=functions.get_todos(), key="todos",
 complete_button = sg.Button("Complete")
 exit_button = sg.Button("Exit")
 
+label2 = sg.Text("", key="label")
+
 window = sg.Window("My To-Do App",
                    layout=[[clock],
                            [label],
                            [input_box, add_button],
                            [list_box, edit_button, complete_button],
-                           [exit_button]],
+                           [exit_button, label2]],
                    font= ["Helvetica", 20])
 #[] means one line on gui
 
@@ -58,6 +60,9 @@ while True:
                 window["todos"].update(values=todos)
                 # window["to-do"].update(value=f"TO-DO: {todo_to_complete} - removed... ")
                 window["todo"].update(value="")
+                window["label"].update(value=f"TO-DO: {todo_to_complete} - removed... ",
+                                       text_color="green",
+                                       font=("Helvetica", 20))
             except IndexError:
                 sg.popup("Please select a to-do", font=("Helvetica", 20))
 
